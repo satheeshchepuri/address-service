@@ -25,17 +25,10 @@ pipeline {
    
     stage('push image to ECR'){
       steps {
-       withDockerRegistry(credentialsId: 'ecr:us-east-1:aws-credentials', url: 'http://092390458462.dkr.ecr.us-east-1.amazonaws.com/address-service') {
+       withDockerRegistry(credentialsId: 'ecr:us-east-1:aws-credentials', url: 'https://453767435700.dkr.ecr.us-east-1.amazonaws.com/address-service') {
           sh 'docker tag address-service:latest 092390458462.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
           sh 'docker push 092390458462.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
         } 
       }
-    }
-  stage('deploy to ECR') {
-      steps {
-         sh 'kubectl apply -f deployment.yaml' 
-         sh 'kubectl apply -f service.yaml'
-      }
-    } 
-  }
+    }  
 }
