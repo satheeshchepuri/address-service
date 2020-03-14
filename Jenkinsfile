@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        sh '/usr/bin/docker build -t address-service .'
+        sh 'docker build -t address-service .'
       }
     }
    
