@@ -46,8 +46,6 @@ pipeline {
 
          sh 'cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH'
 
-         sh 'echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc''
-
          sh 'kubectl version --short --client'
          sh 'kubectl apply -f deployment.yaml' 
          sh 'kubectl apply -f service.yaml'  
