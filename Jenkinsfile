@@ -36,8 +36,9 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
-         sh 'kubectl apply -f deployment.yaml' 
-         sh 'kubectl apply -f service.yaml'  
+         sh 'sudo su'
+         sh '~/root/bin/kubectl/kubectl apply -f deployment.yaml' 
+         sh '~/root/bin/kubectl/kubectl apply -f service.yaml'  
       }
     } 
   }
