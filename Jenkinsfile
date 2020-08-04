@@ -44,7 +44,7 @@ pipeline {
 
          sh 'chmod +x ./kubectl'
 
-         sh 'cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH'
+         sh 'export PATH=$HOME/bin:$PATH'
 
          sh 'kubectl version --short --client'
          sh 'kubectl apply -f deployment.yaml' 
