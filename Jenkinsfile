@@ -38,7 +38,6 @@ pipeline {
       steps {
          sh 'sudo su'
          sh 'echo entered root mode'
-         sh 'aws eks --region us-east-1 update-kubeconfig --name terraform-eks-demo'
          sh 'kubectl apply -f deployment.yaml' 
          sh 'kubectl apply -f service.yaml'  
       }
