@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools { 
         maven 'Maven'
-        jdk 'Java'
+        jdk 'JAVA_HOME'
   }
   stages {
     stage('Clone repository') {
@@ -36,12 +36,9 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
-        node('eks-master-node'){
-          checkout scm
-          sh 'aws eks --region us-east-1 update-kubeconfig --name terraform-eks-demo'
+          sh 'aws eks --region us-east-1 update-kubeconfig --name EKS-MASTER'
          sh 'kubectl apply -f deployment.yaml' 
-         sh 'kubectl apply -f service.yaml' 
-        }
+         sh 'kubectl apply -f service.yaml'  
       }
     } 
   }
