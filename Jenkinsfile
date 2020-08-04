@@ -36,9 +36,21 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
-         sh 'sudo su'
-         sh '~/root/bin/kubectl/kubectl apply -f deployment.yaml' 
-         sh '~/root/bin/kubectl/kubectl apply -f service.yaml'  
+         sh 'curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/kubectl
+
+         sh 'curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/kubectl.sha256'
+
+         sh 'openssl sha1 -sha256 kubectl'
+
+         sh 'chmod +x ./kubectl'
+
+         sh 'cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH'
+
+         sh 'echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc'
+
+         sh 'kubectl version --short --client'
+         sh 'kubectl apply -f deployment.yaml' 
+         sh 'kubectl apply -f service.yaml'  
       }
     } 
   }
