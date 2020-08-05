@@ -36,17 +36,6 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
-         sh 'curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/kubectl'
-
-         sh 'curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/kubectl.sha256'
-
-         sh 'openssl sha1 -sha256 kubectl'
-
-         sh 'chmod +x ./kubectl'
-
-         sh 'export PATH=$HOME/bin:$PATH'
-
-         sh 'kubectl version --short --client'
          sh 'kubectl apply -f deployment.yaml' 
          sh 'kubectl apply -f service.yaml'  
       }
