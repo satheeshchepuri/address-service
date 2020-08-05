@@ -37,13 +37,11 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
+         node('eks-master-node'){
          sh 'aws eks --region us-east-1 update-kubeconfig --name eks-master'
-         sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl'
-         sh 'chmod +x ./kubectl'
-         sh 'sudo mv ./kubectl /usr/local/bin/kubectl'
-         sh 'kubectl version --client'
          sh 'kubectl apply -f deployment.yaml' 
          sh 'kubectl apply -f service.yaml'  
+         }
       }
     } 
   }
