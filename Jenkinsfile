@@ -22,7 +22,6 @@ pipeline {
       steps {
         sh '/usr/bin/docker build -t address-service .'
         sh 'echo build finished'
-        sh 'aws eks --region us-east-1 update-kubeconfig --name eks-master'
       }
     }
    
