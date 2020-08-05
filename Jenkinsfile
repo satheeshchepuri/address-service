@@ -22,6 +22,7 @@ pipeline {
       steps {
         sh '/usr/bin/docker build -t address-service .'
         sh 'echo build finished'
+        sh 'aws eks --region us-east-1 update-kubeconfig --name eks-master'
       }
     }
    
@@ -36,6 +37,7 @@ pipeline {
     }
   stage('deploy to ECR') {
       steps {
+         sh 'aws eks --region us-east-1 update-kubeconfig --name eks-master'
          sh 'kubectl apply -f deployment.yaml' 
          sh 'kubectl apply -f service.yaml'  
       }
