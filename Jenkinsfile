@@ -20,7 +20,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        sh 'sudo setfacl -m user:ec2-user:rw /var/run/docker.sock'
+        sh 'sudo usermod -a -G docker jenkins'
         sh '/usr/bin/docker build -t address-service .'
         sh 'echo build finished'
       }
