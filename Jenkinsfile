@@ -20,8 +20,6 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        sh 'sudo usermod -aG docker jenkins'
-        sh 'sudo usermod -a -G root jenkins'
         sh 'sudo docker build -t address-service .'
         sh 'echo build finished'
       }
@@ -31,8 +29,8 @@ pipeline {
       steps {
         sh 'echo entered ecr'
        withDockerRegistry(credentialsId: 'ecr:us-east-1:aws-cred', url: 'http://349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service') {
-          sh 'sudo docker tag address-service:latest 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
-          sh 'sudo docker push 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
+          sh 'docker tag address-service:latest 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
+          sh 'docker push 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
         } 
       }
     }
