@@ -22,7 +22,7 @@ pipeline {
       steps {
         sh 'sudo usermod -aG docker jenkins'
         sh 'sudo usermod -a -G root jenkins'
-        sh 'sudo docker build -t address-service .'
+        sh 'docker build -t address-service .'
         sh 'echo build finished'
       }
     }
