@@ -29,6 +29,7 @@ pipeline {
       steps {
         sh 'echo entered ecr'
        withDockerRegistry(credentialsId: 'ecr:us-east-1:aws-cred', url: 'http://349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service') {
+          sh 'sudo usermod -aG docker jenkins'
           sh 'docker tag address-service:latest 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
           sh 'docker push 349229500297.dkr.ecr.us-east-1.amazonaws.com/address-service:latest'
         } 
