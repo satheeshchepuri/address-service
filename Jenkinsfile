@@ -21,7 +21,8 @@ pipeline {
     stage('Docker Build') {
       steps {
         sh 'sudo usermod -aG docker jenkins'
-        sh 'docker build -t address-service .'
+        sh 'sudo usermod -a -G root jenkins'
+        sh 'sudo docker build -t address-service .'
         sh 'echo build finished'
       }
     }
